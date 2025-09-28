@@ -1,20 +1,17 @@
+using Library.Items;
+
 namespace Ucu.Poo.RoleplayGame;
 
-public class Staff
+public class Staff: IItem
 {
-    public int AttackValue 
-    {
-        get
-        {
-            return 100;
-        } 
-    }
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public bool IsMagical { get; set; }
 
-    public int DefenseValue
+    public Staff(int attackValue, int defenseValue, bool isMagical)
     {
-        get
-        {
-            return 100;
-        }
+        this.AttackValue = attackValue;
+        this.DefenseValue = defenseValue;
+        this.IsMagical = isMagical;
     }
 }
