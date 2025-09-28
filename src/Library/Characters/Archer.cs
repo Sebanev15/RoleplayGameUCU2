@@ -87,6 +87,7 @@ public class Archer
     }
     
     public void RemoveItem(IItem item)
+
     {
         if(this.Items.Contains(item))
         {

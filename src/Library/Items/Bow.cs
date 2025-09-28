@@ -1,12 +1,16 @@
 namespace Ucu.Poo.RoleplayGame;
-
-public class Bow
+using Library.Items;
+public class Bow:IItem
 {
-    public int AttackValue 
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public bool IsMagical { get; set; }
+
+    public Bow(int attackValue, bool isMagical)
     {
-        get
-        {
-            return 15;
-        } 
+        this.AttackValue = attackValue;
+        this.DefenseValue = 0;
+        this.IsMagical = isMagical;
+
     }
 }
