@@ -1,9 +1,10 @@
+using Library.Items;
+
 namespace Ucu.Poo.RoleplayGame;
 
-public class SpellsBook
+public class SpellsBook : IItem
 {
-    public Spell[] Spells { get; set; }
-    
+    public List<Spell> Spells = new List<Spell>();
     public int AttackValue
     {
         get
@@ -14,6 +15,10 @@ public class SpellsBook
                 value += spell.AttackValue;
             }
             return value;
+        }
+        set
+        {
+            
         }
     }
 
@@ -27,6 +32,39 @@ public class SpellsBook
                 value += spell.DefenseValue;
             }
             return value;
+        }
+        set
+        {
+            
+        }
+    }
+
+    public bool IsMagical
+    {
+        get
+        {
+            return true;
+        }
+        set
+        {
+            
+        }
+    }
+
+    public void AddSpell(Spell spell)
+    {
+        Spells.Add(spell);
+    }
+
+    public void RemoveSpell(Spell spell)
+    {
+        if (this.Spells.Contains(spell))
+        {
+            Spells.Remove(spell);
+        }
+        else
+        {
+            Console.WriteLine($"El libro de hechizos no tiene el hechizo {spell}");
         }
     }
 }
