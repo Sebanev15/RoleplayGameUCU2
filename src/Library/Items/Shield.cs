@@ -1,12 +1,18 @@
+using Library.Items;
+
 namespace Ucu.Poo.RoleplayGame;
 
-public class Shield
+public class Shield:IItem
 {
-    public int DefenseValue
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public bool IsMagical { get; set; }
+
+    public Shield(int attackValue, int defenseValue, bool isMagical)
     {
-        get
-        {
-            return 14;
-        }
+        this.AttackValue = attackValue;
+        this.DefenseValue = defenseValue;
+        this.IsMagical = isMagical;
+
     }
 }
