@@ -1,5 +1,5 @@
 namespace Ucu.Poo.RoleplayGame;
-
+using Library.Items;
 public interface ICharacter
 {
     public int Health { get; set; }
