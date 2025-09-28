@@ -51,7 +51,7 @@ public class Archer
         }
     }
 
-    public void Cure()
+    public void Heal()
     {
         this.Health = 100;
     }
