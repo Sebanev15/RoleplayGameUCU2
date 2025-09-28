@@ -1,12 +1,18 @@
+using Library.Items;
+
 namespace Ucu.Poo.RoleplayGame;
 
-public class Sword
+public class Sword:IItem
 {
-    public int AttackValue 
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public bool IsMagical { get; set; }
+
+    public Sword(int attackValue, int defenseValue, bool isMagical)
     {
-        get
-        {
-            return 20;
-        } 
+        this.AttackValue = attackValue;
+        this.DefenseValue = defenseValue;
+        this.IsMagical = isMagical;
+
     }
 }
