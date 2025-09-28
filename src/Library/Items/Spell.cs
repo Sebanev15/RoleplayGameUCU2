@@ -1,20 +1,28 @@
+using Library.Items;
+
 namespace Ucu.Poo.RoleplayGame;
 
-public class Spell
+public class Spell : IItem
 {
-    public int AttackValue
+    public int AttackValue { get; set; }
+
+    public int DefenseValue { get; set; }
+
+    public bool IsMagical
     {
         get
         {
-            return 70;
+            return true;
+        }
+        set
+        {
+            
         }
     }
 
-    public int DefenseValue
+    public Spell(int attackValue, int defenseValue)
     {
-        get
-        {
-            return 70;
-        }
+        this.AttackValue = attackValue;
+        this.DefenseValue = defenseValue;
     }
 }
