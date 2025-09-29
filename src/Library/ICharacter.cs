@@ -1,7 +1,5 @@
-﻿using Library.Items;
-
-namespace Library.Characters;
-
+namespace Ucu.Poo.RoleplayGame;
+using Library.Items;
 public interface ICharacter
 {
     public int Health { get; set; }
@@ -13,5 +11,4 @@ public interface ICharacter
     public void ReceiveAttack(int attackValue);
     public void Heal();
     public void AddItem(IItem itemAdded);
-    public void RemoveItem(IItem itemAdded);
 }
