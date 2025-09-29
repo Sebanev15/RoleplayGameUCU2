@@ -15,7 +15,7 @@ public class Knight
 
     public Shield Shield { get; set; }
 
-    public Armor Armor { get; set; }
+   // public Armor Armor { get; set; }
 
     public int AttackValue
     {
@@ -29,7 +29,8 @@ public class Knight
     {
         get
         {
-            return Armor.DefenseValue + Shield.DefenseValue;
+            return 0;
+            // return Armor.DefenseValue + Shield.DefenseValue;
         }
     }
 

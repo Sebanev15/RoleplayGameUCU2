@@ -30,6 +30,8 @@ public class Dwarf:ICharacter
         } 
         set
         {
+            
+            
             this.health = value < 0 ? 0 : value;
         }
     }
@@ -42,15 +44,36 @@ public class Dwarf:ICharacter
         {
             this.Health -= power - this.DefenseValue;
         }
+        int newDefense = this.DefenseValue;
+        if (newDefense<=0)
+        {
+            newDefense = 0;
+        }
+
+        if (this.Health<0)
+        {
+            this.Health = 0;
+        }
+        
+        this.DefenseValue = newDefense;
     }
 
     public void Heal()
     {
         this.Health = health;
     }
+
     public void AddItem(IItem itemAdded)
     {
-        if (!Items.Contains(itemAdded))
+
+        foreach (IItem item in Items)
+        {
+            if (item.GetType().Name == itemAdded.GetType().Name)
+            {
+                return;
+            }
+        }
+    if (!Items.Contains(itemAdded))
         {
             // A los enanos ser muy efectivos con armas cuerpo a cuerpo,
             // se le multipica la defensa y el ataque de dicho item si es de tipo Weapon
@@ -73,8 +96,8 @@ public class Dwarf:ICharacter
         {
             if (itemRemoved is Axe)
             {
-                itemRemoved.AttackValue *= 2;
-                itemRemoved.DefenseValue *= 2;
+                itemRemoved.AttackValue /= 2;
+                itemRemoved.DefenseValue /= 2;
             }
             this.Items.Remove(itemRemoved);
         }
@@ -88,7 +111,27 @@ public class Dwarf:ICharacter
         
     }
     
+    public int GetTotalAttack()
+    {
+        int totalAttackDamage = this.AttackValue ;
+        foreach (IItem item in Items)
+        {
+            totalAttackDamage+=item.AttackValue;
+        }
+        
+        return totalAttackDamage;
+    }
     
+    public int GetTotalDefense()
+    {
+        int totalDefenseValue= this.DefenseValue ;
+        foreach (IItem item in Items)
+        {
+            totalDefenseValue+=item.DefenseValue;
+        }
+        
+        return totalDefenseValue;
+    }
     
     
 }
