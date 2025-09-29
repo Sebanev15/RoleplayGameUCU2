@@ -24,43 +24,29 @@ public class Dwarf:ICharacter
 
     public int Health
     {
-        get
-        {
-            return this.health;
-        } 
-        set
-        {
-            
-            
-            this.health = value < 0 ? 0 : value;
-        }
+        get;
+        set;
     }
      
      
 
     public void ReceiveAttack(int power)
     {
+        
         if (this.DefenseValue < power)
         {
             this.Health -= power - this.DefenseValue;
-        }
-        int newDefense = this.DefenseValue;
-        if (newDefense<=0)
-        {
-            newDefense = 0;
         }
 
         if (this.Health<0)
         {
             this.Health = 0;
         }
-        
-        this.DefenseValue = newDefense;
     }
 
     public void Heal()
     {
-        this.Health = health;
+        Health = health;
     }
 
     public void AddItem(IItem itemAdded)
@@ -73,8 +59,7 @@ public class Dwarf:ICharacter
                 return;
             }
         }
-    if (!Items.Contains(itemAdded))
-        {
+   
             // A los enanos ser muy efectivos con armas cuerpo a cuerpo,
             // se le multipica la defensa y el ataque de dicho item si es de tipo Weapon
             if (itemAdded is Axe)
@@ -83,11 +68,8 @@ public class Dwarf:ICharacter
                 itemAdded.DefenseValue *= 2;
             }
             this.Items.Add(itemAdded);
-        }
-        else
-        {
-            Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
-        }
+        
+       
     }
     
     public void RemoveItem(IItem itemRemoved)
@@ -132,6 +114,8 @@ public class Dwarf:ICharacter
         
         return totalDefenseValue;
     }
+    
+    
     
     
 }
