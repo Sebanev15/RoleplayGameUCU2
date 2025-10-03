@@ -2,25 +2,24 @@
 using Ucu.Poo.RoleplayGame;
 
 SpellsBook book = new SpellsBook();
-book.Spells = new Spell[]{ new Spell() };
+book.AddSpell(new Spell(40,40));
+Wizard gandalf = new Wizard("Gandalf", 10, 100);
+gandalf.AddItem(new Staff(20,20,true));
+gandalf.AddItem(book);
 
-Wizard gandalf = new Wizard("Gandalf");
-gandalf.Staff = new Staff();
-gandalf.SpellsBook = book;
-
-Dwarf gimli = new Dwarf("Gimli");
-gimli.Axe = new Axe();
-gimli.Helmet = new Helmet();
-gimli.Shield = new Shield();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
-
-gimli.ReceiveAttack(gandalf.AttackValue);
+Dwarf gimli = new Dwarf("Gimli",30,100);
+gimli.AddItem(new Axe(30,10,false));
+gimli.AddItem(new Helmet(false, 50, 30));
+gimli.AddItem(new Shield(0,60,true));
 
 Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.GetTotalAttack()}");
 
-gimli.Cure();
+gimli.ReceiveAttack(gandalf.GetTotalAttack());
+
+Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+
+gimli.Heal();
 
 Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
 
