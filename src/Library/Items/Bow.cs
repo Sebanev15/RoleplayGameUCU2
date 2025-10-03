@@ -6,10 +6,10 @@ public class Bow:IItem
     public int DefenseValue { get; set; }
     public bool IsMagical { get; set; }
 
-    public Bow(int attackValue, bool isMagical)
+    public Bow(int attackValue, int defenseValue, bool isMagical)
     {
         this.AttackValue = attackValue;
-        this.DefenseValue = 0;
+        this.DefenseValue = defenseValue;
         this.IsMagical = isMagical;
 
     }

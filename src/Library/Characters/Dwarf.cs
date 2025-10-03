@@ -5,18 +5,15 @@ namespace Library.Characters;
 
 public class Dwarf:ICharacter
 {
-    
-
-    public Dwarf(string name, int attackValue, int defenseValue, int maxHealth)
+    public Dwarf(string name, int attackValue, int defenseValue)
     {
         this.Name = name;
         this.AttackValue = attackValue;
         this.DefenseValue = defenseValue;
-        this.health = maxHealth;
         this.Health = this.health;
         this.Items = new List<IItem>();
     }
-    private int health;
+    private int health = 100;
     public string Name { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
@@ -24,52 +21,86 @@ public class Dwarf:ICharacter
 
     public int Health
     {
-        get;
-        set;
+        get
+        {
+            return this.health;
+        } 
+        set
+        {
+            this.health = value < 0 ? 0 : value;
+        }
     }
-     
-     
 
     public void ReceiveAttack(int power)
     {
-        
         if (this.DefenseValue < power)
         {
             this.Health -= power - this.DefenseValue;
-        }
-
-        if (this.Health<0)
-        {
-            this.Health = 0;
         }
     }
 
     public void Heal()
     {
-        Health = health;
+        this.Health = 100;
     }
-
     public void AddItem(IItem itemAdded)
     {
-
-        foreach (IItem item in Items)
+        if (!Items.Contains(itemAdded))
         {
-            if (item.GetType().Name == itemAdded.GetType().Name)
+            foreach (IItem item in Items)
             {
-                return;
+                if (item.GetType() == itemAdded.GetType())
+                {
+                    Console.WriteLine($"WARNING: Ya existia un {item.GetType()}, se procedio a añadir el nuevo item y se elimino el anterior");
+                    Items.Remove(item);
+                    Items.Add(itemAdded);
+                    return;
+                }
+            }
+            
+            this.Items.Add(itemAdded);
+        }
+        else
+        {
+            
+            Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
+        }
+
+    }
+    
+    public int GetTotalAttack()
+    {
+        int totalAttack = this.AttackValue;
+        foreach (IItem item in this.Items)
+        {
+            if (item is Axe || item is Sword)
+            {
+                totalAttack += item.AttackValue*2;    
+            }
+            else
+            {
+                totalAttack += item.AttackValue;
+            }
+            
+        }
+        return totalAttack;
+    }
+    
+    public int GetTotalDefense()
+    {
+        int totalDefense = this.DefenseValue;
+        foreach (IItem item in this.Items)
+        {
+            if (item is Axe || item is Sword)
+            {
+                totalDefense += item.DefenseValue * 2;
+            }
+            else
+            {
+                totalDefense += item.DefenseValue;
             }
         }
-   
-            // A los enanos ser muy efectivos con armas cuerpo a cuerpo,
-            // se le multipica la defensa y el ataque de dicho item si es de tipo Weapon
-            if (itemAdded is Axe)
-            {
-                itemAdded.AttackValue *= 2;
-                itemAdded.DefenseValue *= 2;
-            }
-            this.Items.Add(itemAdded);
-        
-       
+        return totalDefense;
     }
     
     public void RemoveItem(IItem itemRemoved)
@@ -78,8 +109,8 @@ public class Dwarf:ICharacter
         {
             if (itemRemoved is Axe)
             {
-                itemRemoved.AttackValue /= 2;
-                itemRemoved.DefenseValue /= 2;
+                itemRemoved.AttackValue *= 2;
+                itemRemoved.DefenseValue *= 2;
             }
             this.Items.Remove(itemRemoved);
         }
@@ -87,35 +118,6 @@ public class Dwarf:ICharacter
         {
             Console.WriteLine("ERROR " + this.Name + " no tenia un/a " + itemRemoved.GetType().Name);
         }
-        
-        
-        
-        
     }
-    
-    public int GetTotalAttack()
-    {
-        int totalAttackDamage = this.AttackValue ;
-        foreach (IItem item in Items)
-        {
-            totalAttackDamage+=item.AttackValue;
-        }
-        
-        return totalAttackDamage;
-    }
-    
-    public int GetTotalDefense()
-    {
-        int totalDefenseValue= this.DefenseValue ;
-        foreach (IItem item in Items)
-        {
-            totalDefenseValue+=item.DefenseValue;
-        }
-        
-        return totalDefenseValue;
-    }
-    
-    
-    
     
 }
