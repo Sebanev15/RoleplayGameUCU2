@@ -3,7 +3,7 @@ using Library.Items;
 
 public class Archer
 {
-    private int health;
+    private int health = 100;
     public string Name { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
@@ -19,12 +19,11 @@ public class Archer
             this.health = value < 0 ? 0 : value;
         }
     }
-    public Archer(string name, int attackValue, int defenseValue, int maxHealth)
+    public Archer(string name, int attackValue, int defenseValue)
     {
         this.Name = name;
         this.AttackValue = attackValue;
         this.DefenseValue = defenseValue;
-        this.health = maxHealth;
         this.Health = this.health;
         this.Items = new List<IItem>();
     }
@@ -41,7 +40,15 @@ public class Archer
         int totalAttack = this.AttackValue;
         foreach (IItem item in this.Items)
         {
-            totalAttack += item.AttackValue;
+            if (item is Bow)
+            {
+                totalAttack += item.AttackValue*2;    
+            }
+            else
+            {
+                totalAttack += item.AttackValue;
+            }
+            
         }
         return totalAttack;
     }
@@ -51,39 +58,45 @@ public class Archer
         int totalDefense = this.DefenseValue;
         foreach (IItem item in this.Items)
         {
-            totalDefense += item.DefenseValue;
+            if (item is Bow)
+            {
+                totalDefense += item.DefenseValue * 2;
+            }
+            else
+            {
+                totalDefense += item.DefenseValue;
+            }
         }
         return totalDefense;
     }
     
     public void Heal()
     {
-        this.Health = health;
+        this.Health = 100;
     }
     
-    public void AddItem(IItem item)
+    public void AddItem(IItem itemAdded)
     {    
-        IItem existente = null;
-        
-        foreach (IItem i in Items)
+        if (!Items.Contains(itemAdded))
         {
-            if (i.GetType() == item.GetType())
+            foreach (IItem item in Items)
             {
-                existente = i;
-                break;
+                if (item.GetType() == itemAdded.GetType())
+                {
+                    Console.WriteLine($"WARNING: Ya existia un {item.GetType()}, se procedio a añadir el nuevo item y se elimino el anterior");
+                    Items.Remove(item);
+                    Items.Add(itemAdded);
+                    return;
+                }
             }
-        }
-
-        if (existente != null)
-        {
-            Items.Remove(existente);
-            Items.Add(item);    
+            
+            this.Items.Add(itemAdded);
         }
         else
         {
-            Items.Add(item);
+            
+            Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
         }
-        
     }
     
     public void RemoveItem(IItem item)
@@ -91,6 +104,7 @@ public class Archer
     {
         if(this.Items.Contains(item))
         {
+            
             this.Items.Remove(item);
         }
         else

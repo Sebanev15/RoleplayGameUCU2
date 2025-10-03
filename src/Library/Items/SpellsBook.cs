@@ -53,7 +53,15 @@ public class SpellsBook : IItem
 
     public void AddSpell(Spell spell)
     {
-        Spells.Add(spell);
+        if (!Spells.Contains(spell))
+        {
+            Spells.Add(spell);    
+        }
+        else
+        {
+            Console.WriteLine("ERROR: este libro ya contiene el hechizo");
+        }
+        
     }
 
     public void RemoveSpell(Spell spell)

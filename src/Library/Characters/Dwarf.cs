@@ -5,18 +5,15 @@ namespace Library.Characters;
 
 public class Dwarf:ICharacter
 {
-    
-
-    public Dwarf(string name, int attackValue, int defenseValue, int maxHealth)
+    public Dwarf(string name, int attackValue, int defenseValue)
     {
         this.Name = name;
         this.AttackValue = attackValue;
         this.DefenseValue = defenseValue;
-        this.health = maxHealth;
         this.Health = this.health;
         this.Items = new List<IItem>();
     }
-    private int health;
+    private int health = 100;
     public string Name { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
@@ -33,8 +30,6 @@ public class Dwarf:ICharacter
             this.health = value < 0 ? 0 : value;
         }
     }
-     
-     
 
     public void ReceiveAttack(int power)
     {
@@ -46,25 +41,66 @@ public class Dwarf:ICharacter
 
     public void Heal()
     {
-        this.Health = health;
+        this.Health = 100;
     }
     public void AddItem(IItem itemAdded)
     {
         if (!Items.Contains(itemAdded))
         {
-            // A los enanos ser muy efectivos con armas cuerpo a cuerpo,
-            // se le multipica la defensa y el ataque de dicho item si es de tipo Weapon
-            if (itemAdded is Axe)
+            foreach (IItem item in Items)
             {
-                itemAdded.AttackValue *= 2;
-                itemAdded.DefenseValue *= 2;
+                if (item.GetType() == itemAdded.GetType())
+                {
+                    Console.WriteLine($"WARNING: Ya existia un {item.GetType()}, se procedio a añadir el nuevo item y se elimino el anterior");
+                    Items.Remove(item);
+                    Items.Add(itemAdded);
+                    return;
+                }
             }
+            
             this.Items.Add(itemAdded);
         }
         else
         {
+            
             Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
         }
+
+    }
+    
+    public int GetTotalAttack()
+    {
+        int totalAttack = this.AttackValue;
+        foreach (IItem item in this.Items)
+        {
+            if (item is Axe || item is Sword)
+            {
+                totalAttack += item.AttackValue*2;    
+            }
+            else
+            {
+                totalAttack += item.AttackValue;
+            }
+            
+        }
+        return totalAttack;
+    }
+    
+    public int GetTotalDefense()
+    {
+        int totalDefense = this.DefenseValue;
+        foreach (IItem item in this.Items)
+        {
+            if (item is Axe || item is Sword)
+            {
+                totalDefense += item.DefenseValue * 2;
+            }
+            else
+            {
+                totalDefense += item.DefenseValue;
+            }
+        }
+        return totalDefense;
     }
     
     public void RemoveItem(IItem itemRemoved)
@@ -82,13 +118,6 @@ public class Dwarf:ICharacter
         {
             Console.WriteLine("ERROR " + this.Name + " no tenia un/a " + itemRemoved.GetType().Name);
         }
-        
-        
-        
-        
     }
-    
-    
-    
     
 }
