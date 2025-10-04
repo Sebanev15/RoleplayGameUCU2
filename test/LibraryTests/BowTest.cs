@@ -18,7 +18,7 @@ public class BowTest
     [Test]
     public void ConstructorTest()
     {
-        Assert.That(recurvado.AttackValue, Is.EqualTo100);
+        Assert.That(recurvado.AttackValue, Is.EqualTo(100);
         Assert.That(recurvado.DefenseValue, Is.EqualTo(20));
         Assert.That(recurvado.IsMagical, Is.EqualTo(false));
     }

@@ -42,7 +42,7 @@ public class KnightTest
         Assert.That(megacaballero.Health, Is.EqualTo(100));
         megacaballero.Heal();
         megacaballero.ReceiveAttack(100);
-        Assert.That(megacaballero.Health, Is.EqualTo100);
+        Assert.That(megacaballero.Health, Is.EqualTo(100));
     }
     
     [Test]
