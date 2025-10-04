@@ -1,4 +1,5 @@
 ﻿using Library.Characters;
+using Library.Items;
 using Ucu.Poo.RoleplayGame;
 
 SpellsBook book = new SpellsBook();
@@ -23,3 +24,7 @@ gimli.Heal();
 
 Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
 
+
+
+Dwarf enojon = new Dwarf("Enojon", 110, 100);
+Armor pechera = new Armor(0, 200, false);
