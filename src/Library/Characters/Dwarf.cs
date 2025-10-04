@@ -38,7 +38,6 @@ public class Dwarf:ICharacter
             this.Health -= power - this.DefenseValue;
         }
     }
-
     public void Heal()
     {
         this.Health = 100;
@@ -62,7 +61,6 @@ public class Dwarf:ICharacter
         }
         else
         {
-            
             Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
         }
 
@@ -102,16 +100,10 @@ public class Dwarf:ICharacter
         }
         return totalDefense;
     }
-    
     public void RemoveItem(IItem itemRemoved)
     {
         if(this.Items.Contains(itemRemoved))
         {
-            if (itemRemoved is Axe)
-            {
-                itemRemoved.AttackValue *= 2;
-                itemRemoved.DefenseValue *= 2;
-            }
             this.Items.Remove(itemRemoved);
         }
         else

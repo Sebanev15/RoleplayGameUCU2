@@ -1,26 +1,5 @@
 ﻿using Library.Characters;
-using Ucu.Poo.RoleplayGame; 
+using Library.Items;
 
-SpellsBook book = new SpellsBook();
-book.Spells = new Spell[]{ new Spell() };
-
-Wizard gandalf = new Wizard("Gandalf");
-gandalf.Staff = new Staff();
-gandalf.SpellsBook = book;
-
-Dwarf gimli = new Dwarf("Gimli");
-gimli.Axe = new Axe();
-gimli.Helmet = new Helmet();
-gimli.Shield = new Shield();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
-
-gimli.ReceiveAttack(gandalf.AttackValue);
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
-gimli.Cure();
-
-Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-
+Dwarf enojon = new Dwarf("Enojon", 110, 100);
+Armor pechera = new Armor(0, 200, false); 
