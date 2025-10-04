@@ -110,7 +110,7 @@ public class Wizard: ICharacter
         }
         else
         {
-            Console.WriteLine("ERROR " + this.Name + " no tenia un/a " + itemRemoved.GetType().Name);
+            Console.WriteLine("ERROR: " + this.Name + " no tenia un/a " + itemRemoved.GetType().Name);
         }
     }
 }
