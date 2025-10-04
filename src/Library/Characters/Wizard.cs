@@ -85,7 +85,7 @@ public class Wizard: ICharacter
             {
                 if (item.GetType() == itemAdded.GetType())
                 {
-                    Console.WriteLine($"WARNING: Ya existia un {item.GetType()}, se procedio a añadir el nuevo item y se elimino el anterior");
+                    Console.WriteLine($"WARNING: Ya existia un {item.GetType().Name}, se procedio a añadir el nuevo item y se elimino el anterior");
                     Items.Remove(item);
                     Items.Add(itemAdded);
                     return;
@@ -97,7 +97,7 @@ public class Wizard: ICharacter
         else
         {
             
-            Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} ");
+            Console.WriteLine($"{this.Name} ya tiene un {itemAdded.GetType().Name} o el item no es magico");
         }
 
     }
