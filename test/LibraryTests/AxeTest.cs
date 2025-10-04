@@ -18,7 +18,7 @@ public class AxeTest
     [Test]
     public void ConstructorTest()
     {
-        Assert.That(axel.AttackValue, Is.EqualTo(100);
+        Assert.That(axel.AttackValue, Is.EqualTo(100));
         Assert.That(axel.DefenseValue, Is.EqualTo(20));
         Assert.That(axel.IsMagical, Is.EqualTo(false));
     }
